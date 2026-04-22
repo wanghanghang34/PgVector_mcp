@@ -1,6 +1,9 @@
 spring:
   application:
     name: PgVector_mcp
+  profiles:
+    # 激活的profile (可选: dev模式会插入示例数据)
+    active: dev
   
   # WebFlux 服务器配置
   webflux:
@@ -8,7 +11,7 @@ spring:
   
   # PostgreSQL 数据源配置
   datasource:
-    url: jdbc:postgresql://localhost:5432/pgvector_db
+    url: jdbc:postgresql://localhost:5434/vectordb
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -28,17 +31,24 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: qwen2.5:7b
+        model: qwen3:0.6b
         temperature: 0.7
       embedding:
-        model: nomic-embed-text
+        model: qwen3-embedding:0.6b
     
     # PgVector 向量存储配置
     vectorstore:
       pgvector:
-        dimensions: 768
+        host: localhost
+        port: 5434
+        database: vectordb
+        username: postgres
+        password: postgres
+        initialize-schema: true
         index-type: hnsw
-        distance-type: cosine-distance
+        dimensions: 1024
+        remove-existing-vector-store-table: false
+        table-name: test_mcp
 
 # MCP Server 配置
 spring.ai.mcp.server:
@@ -51,8 +61,3 @@ spring.ai.mcp.server:
 # 服务器端口配置
 server:
   port: 8080
-
-# 激活的profile (可选: dev模式会插入示例数据)
-# spring:
-#   profiles:
-#     active: dev
