@@ -20,6 +20,20 @@ spring:
       embedding:
         model: qwen3-embedding:0.6b
 
+    # PgVector 向量存储配置
+    vectorstore:
+      pgvector:
+        host: localhost
+        port: 5434
+        database: vectordb
+        username: postgres
+        password: postgres
+        initialize-schema: true
+        index-type: hnsw
+        dimensions: 1024
+        remove-existing-vector-store-table: false
+        table-name: test_mcp
+
   # PostgreSQL 数据源配置
   datasource:
     url: jdbc:postgresql://localhost:5434/vectordb
@@ -36,19 +50,6 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    # PgVector 向量存储配置
-    vectorstore:
-      pgvector:
-        host: localhost
-        port: 5434
-        database: vectordb
-        username: postgres
-        password: postgres
-        initialize-schema: true
-        index-type: hnsw
-        dimensions: 1024
-        remove-existing-vector-store-table: false
-        table-name: test_mcp
 
 # 服务器端口配置
 server:
