@@ -2,6 +2,10 @@ spring:
   application:
     name: PgVector_mcp
   
+  # WebFlux 服务器配置
+  webflux:
+    base-path: /
+  
   # PostgreSQL 数据源配置
   datasource:
     url: jdbc:postgresql://localhost:5432/pgvector_db
@@ -41,6 +45,11 @@ spring.ai.mcp.server:
   version: 1.0.0
   type: SYNC
   enabled: true
+  protocol: SSE
+
+# 服务器端口配置
+server:
+  port: 8080
 
 # 激活的profile (可选: dev模式会插入示例数据)
 # spring:

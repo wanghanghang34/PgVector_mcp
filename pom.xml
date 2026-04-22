@@ -25,6 +25,12 @@
             <artifactId>spring-ai-starter-mcp-server</artifactId>
         </dependency>
 
+        <!-- Spring Boot WebFlux (MCP Server 需要) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
         <!-- Spring AI Ollama Embedding -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
