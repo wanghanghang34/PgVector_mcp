@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: PgVector_mcp
+  
+  # PostgreSQL 数据源配置
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pgvector_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  # JPA 配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  # Spring AI Ollama 配置
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: qwen2.5:7b
+        temperature: 0.7
+      embedding:
+        model: nomic-embed-text
+    
+    # PgVector 向量存储配置
+    vectorstore:
+      pgvector:
+        dimensions: 768
+        index-type: hnsw
+        distance-type: cosine-distance
+
+# MCP Server 配置
+spring.ai.mcp.server:
+  name: pgvector-mcp-server
+  version: 1.0.0
+  type: SYNC
+  enabled: true
+
+# 激活的profile (可选: dev模式会插入示例数据)
+# spring:
+#   profiles:
+#     active: dev
